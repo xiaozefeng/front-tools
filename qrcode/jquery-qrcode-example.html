@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>Table impl</p>
+    </div>
+    <div id="qrcodeTable"></div>    
+    
+    <div>
+        <p>Canvas impl</p>
+    </div>
+    <div>
+        <label for="input"></label>
+        <input type="text" id="input">
+        <button type="button" onclick="regenerate()">重新生成</button>
+    </div>
+    <br>
+
+    <div id="qrcodeCanvas"></div>
+</body>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.qrcode.js"></script>
+<script src="../js/qrcode.js"></script>
+<script src="../js/vue.min.js"></script>
+<script>
+    $(function(){
+        $('#qrcodeTable').qrcode({
+            render: 'table',
+            text: 'http://jetienne.com'
+        });
+
+        $('#qrcodeCanvas').qrcode({
+            text: 'http://jetienne.com'
+        });
+    });
+</script>
+</html>
