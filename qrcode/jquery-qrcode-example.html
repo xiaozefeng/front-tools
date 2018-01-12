@@ -7,38 +7,24 @@
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <p>Table impl</p>
-    </div>
-    <div id="qrcodeTable"></div>    
-    
-    <div>
-        <p>Canvas impl</p>
-    </div>
-    <div>
-        <label for="input"></label>
-        <input type="text" id="input">
-        <button type="button" onclick="regenerate()">重新生成</button>
-    </div>
-    <br>
-
-    <div id="qrcodeCanvas"></div>
+   <div id="app">
+       <div id="qrcode"></div>
+   </div>
 </body>
 
+
+<script src="../js/qrcode.min.js"></script>
 <script src="../js/jquery.min.js"></script>
-<script src="../js/jquery.qrcode.js"></script>
-<script src="../js/qrcode.js"></script>
-<script src="../js/vue.min.js"></script>
 <script>
     $(function(){
-        $('#qrcodeTable').qrcode({
-            render: 'table',
-            text: 'http://jetienne.com'
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: "http://jindo.dev.naver.com/collie",
+            width: 128,
+            height: 128,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
         });
-
-        $('#qrcodeCanvas').qrcode({
-            text: 'http://jetienne.com'
-        });
-    });
+    })
 </script>
 </html>

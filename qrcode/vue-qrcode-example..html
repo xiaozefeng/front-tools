@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input {
+            width: 500px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+   <div id="app">
+       <div>
+            <input type="text" v-model.lazy="val">
+       </div>
+       <br>
+        <my-qrcode :val="val"></my-qrcode>
+   </div>
+</body>
+
+
+<script src="../js/qrcode.min.js"></script>
+<script src="../js/vue.min.js"></script>
+<script>
+    var qrcode = null;
+    Vue.component("my-qrcode",{
+        template:`
+            <div>
+                <div ref="qr"></div>
+                </div>
+        `,
+        props:{
+            val:{
+                type:String
+            },
+            size:{
+                type:Number,
+                default:100
+            }
+        },
+        mounted(){
+            var $qrcode = this.$refs.qr;
+            console.log(this.val)
+            qrcode = new QRCode($qrcode, this.val);
+            this.hasInit =true;
+        },
+        data:{
+            hasInit: false,
+        },
+        methods:{
+            makeCode(value){
+                qrcode.clear();
+                qrcode.makeCode(value)
+            }
+        },
+        watch:{
+            val:function(value){
+                if(this.hasInit){
+                    this.makeCode(value)
+                }
+            }  
+        }
+    })
+   new Vue({
+       el:'#app',
+       data:{
+            val:'http://www.baidu.com'
+       }
+   });
+</script>
+</html>
